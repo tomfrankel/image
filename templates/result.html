@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>RESULT</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href='static/style.css'>
+        <script type="text/javascript" src="script.js"></script>
+    </head>
+    <style>
+        .form-control::-moz-placeholder {
+          color: white;
+        }
+        .form-control:-ms-input-placeholder {
+          color: white;
+        }
+        .form-control::-webkit-input-placeholder {
+          color: white;
+        }
+
+    </style>
+
+    <body align=center>
+
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4"><legend><h1>SSI Aeration Class Results</h1></legend></div>
+            <div class="col-md-4"></div>
+        </div>
+
+        <div class="row">
+            <div style="min-height: 200px; background-color: #EEE;" align="center"><img src="{{ image_link }}" ></img></div>
+            <br>
+        </div>
+
+        <form class="form-horizontal" action="/report/{{ im_uuid }}">
+            <fieldset disabled>
+
+                {% for value, label, color in loopdata %}
+
+                <div class="form-group">
+                    <label class="control-label col-xs-4 center-block" for="Value">{{ label }}</label>
+                    <div class="col-xs-4 center-block" align="center">
+                      <b>
+                        <input type="text" name="result" maxlength="20" id="outputs" class="form-control" placeholder="{{ value*100 }} %" style="background-color:{{color}};">
+                      </b>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+            </fieldset>
+
+            <br>
+
+            <div class="form-group">
+                <input type="submit" class="submitbutton" value="Get Printable Report and Analysis" tabindex="11" />
+            </div>
+
+            <br>
+
+        </form>
+
+    </body>
+
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90925949-1', 'auto');
+ga('send', 'pageview');
+</script>
