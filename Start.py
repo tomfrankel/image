@@ -11,7 +11,7 @@ import uuid
 from collections import OrderedDict
 
 
-app = Flask(__name__, template_folder='Templates')
+app = Flask(__name__, template_folder='templates')
 app.config.from_object(__name__)
 
 app.secret_key = '0yX Rr]A/3TH!j9WX/,?RZmN8j~XHL' # Useful if using sessions. Did not need finally.
