@@ -4,7 +4,8 @@ import sys
 import os
 
 def clarifai_predict(link):
-    app = ClarifaiApp("RpBWVHJVCR3g6AZzeITjaNkjZsq7WC0LKQYR9ARF", "MtF-DFcaa2NDzaHBaE0uBtL8NLIhITggwvduQBt8")
+    app=ClarifaiApp(api_key="a6ab6850952b49f4b31aa72d451a7bff")
+    #app = ClarifaiApp("RpBWVHJVCR3g6AZzeITjaNkjZsq7WC0LKQYR9ARF", "MtF-DFcaa2NDzaHBaE0uBtL8NLIhITggwvduQBt8")
     model = app.models.get('My First Application')
     image = ClImage(url=link)
 
