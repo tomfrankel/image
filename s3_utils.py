@@ -2,12 +2,7 @@ import boto3
 
 import requests
 
-from io import BytesIO
-import boto3
-
-import requests
-
-from io import BytesIO
+from StringIO import StringIO
 import json
 
 bucket_url = "http://ssiaeration-images.s3-website-us-west-2.amazonaws.com/"
@@ -17,7 +12,7 @@ def add_image(im, im_uuid):
     if im.mode != "RGB":
         im = im.convert("RGB")
 
-    img_io = BytesIO()
+    img_io = StringIO()
     im.save(img_io, 'JPEG', quality=100)
     img_io.seek(0)
 
@@ -31,7 +26,7 @@ def add_prediction(prediction, im_uuid):
     # JSON-ise a prediction and saves it to s3 bucket under the name <im_uuid>.json
     s3 = boto3.resource('s3')
 
-    prediction_io = BytesIO()
+    prediction_io = StringIO()
     json.dump(prediction, prediction_io)
 
     prediction_io.seek(0)
@@ -44,6 +39,6 @@ def load_prediction(im_uuid):
     # Raw json
     json_file = requests.get(link)
     # Python list version
-    prediction = json.load(BytesIO(json_file.content))
+    prediction = json.load(StringIO(json_file.content))
 
     return json_file.content, prediction

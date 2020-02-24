@@ -59,7 +59,7 @@ def parse_prediction(the_prediction):
         }
         return col[int(val*10)]  # lower-rounded int values from 0 to 10
 
-    ordered_predictions = list(reversed(sorted([(val, key, color(val)) for key, val in list(predictions.items())])))
+    ordered_predictions = list(reversed(sorted([(val, key, color(val)) for key, val in predictions.items()])))
 
     return ordered_predictions # list of tuples: [(val, label), (val, label), ...]
 
