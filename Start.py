@@ -4,7 +4,7 @@ import s3_utils as s3
 from flask import Flask, render_template, request, session, send_file, url_for, app, safe_join, send_from_directory
 from PIL import Image, ImageOps
 import requests
-from StringIO import StringIO
+from io import StringIO
 
 import os
 import uuid

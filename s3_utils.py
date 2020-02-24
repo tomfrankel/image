@@ -3,6 +3,11 @@ import boto3
 import requests
 
 from StringIO import StringIO
+import boto3
+
+import requests
+
+from io import StringIO
 import json
 
 bucket_url = "http://ssiaeration-images.s3-website-us-west-2.amazonaws.com/"
