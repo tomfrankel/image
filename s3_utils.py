@@ -2,7 +2,7 @@ import boto3
 
 import requests
 
-from StringIO import StringIO
+from io import StringIO
 import boto3
 
 import requests
