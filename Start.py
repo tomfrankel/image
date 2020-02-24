@@ -4,7 +4,7 @@ import s3_utils as s3
 from flask import Flask, render_template, request, session, send_file, url_for, app, safe_join, send_from_directory
 from PIL import Image, ImageOps
 import requests
-from io import StringIO
+from io import BytesIO
 
 import os
 import uuid
@@ -39,7 +39,7 @@ def result():
     if (link == ""):
         file_u = request.files['file']
         if file_u.filename.split(".")[-1].lower() in ALLOWED_EXTENSIONS:
-            img_io = StringIO()
+            img_io = BytesIO()
             file_u.save(img_io)
             img_io.seek(0)
             img = Image.open(img_io)
@@ -48,7 +48,7 @@ def result():
             # Maybe return here an error message like "unknown image file extension".
     else:
         img_r = requests.get(link)
-        img = Image.open(StringIO(img_r.content))
+        img = Image.open(BytesIO(img_r.content))
     # Save image
     new_img_link = s3.add_image(img, im_uuid)
 
@@ -71,14 +71,14 @@ def result():
 @app.route('/imgs/<im_uuid>')
 def serve_img(im_uuid):
     def serve_pil_image(pil_img):
-        img_io = StringIO()
+        img_io = BytesIO()
         pil_img.save(img_io, 'JPEG', quality=70)
         img_io.seek(0)
         return send_file(img_io, mimetype='image/jpeg')
 
     url = s3.bucket_url + im_uuid
     img_r = requests.get(url)
-    img = Image.open(StringIO(img_r.content))
+    img = Image.open(BytesIO(img_r.content))
     if img.mode != "RGB":
         img = img.convert("RGB")
     # Final resize
